@@ -53,41 +53,15 @@ export class PackageSearchComponent implements OnInit {
                 () => console.log('Get all agencies complete'));
     }
 
+    public reset(): void {
+        PackageSearchComponent.searchState.searchFilter = new SearchFilter();
+        this.searchFilter = PackageSearchComponent.searchState.searchFilter;
+    }
+
     private changePage(pageNumber : number): void {
         if (pageNumber >= 0 && pageNumber < this.packages.lastPage) {
             this.pageInfo.page = pageNumber;
             this.search();
-        }
-    }
-
-    private sort(column : string): void {
-        if (this.pageInfo.sortField === column) {
-            this.flipSortDirection();
-        } else {
-            this.pageInfo.sortDirection = 'asc';
-        }
-        this.pageInfo.sortField = column;
-        this.pageInfo.page = 0;
-        this.search();
-    }
-
-    public getSortDirectionArrow(column: string): string {
-        if (this.pageInfo.sortField === column) {
-            if (this.pageInfo.sortDirection === 'asc') {
-                return '?';
-            } else {
-                return '?';
-            }
-        } else {
-            return '';
-        }
-    }
-
-    private flipSortDirection(): void {
-        if (this.pageInfo.sortDirection === 'asc') {
-            this.pageInfo.sortDirection = 'desc';
-        } else {
-            this.pageInfo.sortDirection = 'asc';
         }
     }
 }

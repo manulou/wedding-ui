@@ -1,0 +1,519 @@
+        <div class="main-inner">
+            <div class="content">
+                <div class="mt-150">
+    <div class="hero-image">
+    <div class="hero-image-inner" style="background-image: url('assets/img/tmp/slider-large-3.jpg');">
+        <div class="hero-image-content">
+            <div class="container">
+                <h1>Palm Tree Wedding</h1>
+
+                <p>Find the wedding package of your dreams today.<br>Browse through our collection to pick the best spor for your wedding</p>
+
+                <a routerLink="/search" class="btn btn-primary btn-lg">View Packages</a>
+                <!--a href="listing-submit.html" class="btn btn-secondary btn-lg">Submit</a -->
+            </div><!-- /.container -->
+        </div><!-- /.hero-image-content -->
+
+        <div class="hero-image-form-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-8 col-lg-4 col-lg-offset-7">
+                        <form method="get" action="?">
+                            <h2>Start Searching</h2>
+
+                            <div class="hero-image-keyword form-group">
+                                <input id="keyword" name="keyword" type="text" class="form-control"
+                                       placeholder="Keyword" [(ngModel)]="searchFilter.keyword" #keyword="ngModel">
+                            </div><!-- /.form-group -->
+
+                            <div class="hero-image-location form-group">
+                                <select id="country" name="country" class="form-control selectpicker" title="Country"
+                                        [(ngModel)]="searchFilter.countryId" #country="ngModel">
+                                    <option value="0"></option>
+                                    <option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}</option>
+                                </select>
+                            </div><!-- /.form-group -->
+
+                            <div class="hero-image-category form-group">
+                                <select id="location" name="location" class="form-control selectpicker" title="Location">
+                                    <option value="">Ocean coast</option>
+                                    <option value="">Yacht</option>
+                                    <option value="">Mountain top</option>
+                                </select>
+                            </div><!-- /.form-group -->
+
+                            <div class="hero-image-price form-group">
+                                <input id="maxPrice" name="maxPrice" type="text" class="form-control"
+                                       placeholder="Max Price" [(ngModel)]="searchFilter.maxPrice" #maxPrice="ngModel">
+                            </div><!-- /.form-group -->
+
+                            <button class="btn btn-primary btn-block" (click)="search()">Search</button>
+                        </form>
+                    </div><!-- /.col-* -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </div><!-- /.hero-image-form-wrapper -->
+    </div><!-- /.hero-image-inner -->
+</div><!-- /.hero-image -->
+
+</div>
+
+<div class="container">
+
+    <div class="page-header">
+    <h1>Most Recent Wedding Packages</h1>
+    <p>List of most recent romantic wedding packages. Check out those locations right now!</p>
+</div><!-- /.page-header -->
+
+<div class="cards-simple-wrapper">
+    <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="assets/img/tmp/product-2.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Tasty Brazil Coffee</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Coffee</div>
+
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+
+
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="assets/img/tmp/product-3.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Healthy Breakfast</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Food</div>
+
+                            <div class="card-simple-price">$12 / person</div>
+
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+
+
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="assets/img/tmp/product-4.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Coffee &amp; Newspaper</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Restaurant</div>
+
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+
+
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="assets/img/tmp/product-5.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Boat Trip</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Vacation</div>
+
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+
+
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="assets/img/tmp/product-6.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Italian Restaurant</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Restaurant</div>
+
+                            <div class="card-simple-price">$28 / person</div>
+
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+
+
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="assets/img/tmp/product-7.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Best Brazil Coffee</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Pub</div>
+
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+
+
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="assets/img/tmp/product-8.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Retro Shop</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Shop</div>
+
+                            <div class="card-simple-price">$3 / cup</div>
+
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+
+
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="assets/img/tmp/product-9.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Wine Tasting</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Event</div>
+
+                            <div class="card-simple-price">$13 / ticket</div>
+
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+
+    </div><!-- /.row -->
+</div><!-- /.cards-simple-wrapper -->
+
+
+    <div class="block background-black-light fullwidth mt80">
+        <div class="row">
+    <div class="col-sm-4">
+        <div class="box">
+            <div class="box-icon">
+                <i class="fa fa-life-ring"></i>
+            </div><!-- /.box-icon -->
+
+            <div class="box-content">
+                <h2>E-mail Support</h2>
+                <p>We are always here to answer all your questions. Feel free to contact us.</p>
+
+                <a href="#">Read More <i class="fa fa-chevron-right"></i></a>
+            </div><!-- /.box-content -->
+        </div>
+    </div><!-- /.col-sm-4 -->
+
+    <div class="col-sm-4">
+        <div class="box">
+            <div class="box-icon">
+                <i class="fa fa-flask"></i>
+            </div><!-- /.box-icon -->
+
+            <div class="box-content">
+                <h2>Always Improving</h2>
+                <p>Our dedicated team of developers are implementing awesome features.</p>
+
+                <a href="#">Read More <i class="fa fa-chevron-right"></i></a>
+            </div><!-- /.box-content -->
+        </div>
+    </div><!-- /.col-sm-4 -->
+
+    <div class="col-sm-4">
+        <div class="box">
+            <div class="box-icon">
+                <i class="fa fa-thumbs-o-up"></i>
+            </div><!-- /.box-icon -->
+
+            <div class="box-content">
+                <h2>Best Quality</h2>
+                <p>We list only verifiend places and events to provide best content.</p>
+
+                <a href="#">Read More <i class="fa fa-chevron-right"></i></a>
+            </div><!-- /.box-content -->
+        </div>
+    </div><!-- /.col-sm-4 -->
+</div><!-- /.row -->
+
+    </div><!-- /.block -->
+
+    <div class="block background-white background-transparent-image fullwidth">
+        <div class="page-header">
+    <h1>Hand Picked by us</h1>
+    <p>Check out the best packahes and agencies in the world. Experience which you never forget.</p>
+</div><!-- /.page-header -->
+
+<div class="cards-wrapper">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card" data-background-image="assets/img/tmp/product-7.jpg">
+                        <div class="card-label">
+                            <a href="listing-detail.html">Coffe</a>
+                        </div><!-- /.card-label -->
+
+                        <div class="card-content">
+                            <h2><a href="listing-detail.html">Brazilian Coffe Taste</a></h2>
+
+                            <div class="card-meta">
+                                <i class="fa fa-map-o"></i> 347/26 22th Avenue, NYC USA
+                            </div><!-- /.card-meta -->
+
+                            <div class="card-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div>
+
+                        </div><!-- /.card-content -->
+                    </div><!-- /.card -->
+                </div><!-- /.col-* -->
+            </div><!-- /.row -->
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card" data-background-image="assets/img/tmp/product-4.jpg">
+                        <div class="card-label">
+                            <a href="listing-detail.html">Restaurant</a>
+                        </div><!-- /.card-label -->
+
+                        <div class="card-content">
+                            <h2><a href="listing-detail.html">Coffee &amp; Newspaper</a></h2>
+
+                            <div class="card-meta">
+                                <i class="fa fa-map-o"></i> 347/26 22th Avenue, NYC USA
+                            </div><!-- /.card-meta -->
+
+                            <div class="card-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div>
+                        </div><!-- /.card-content -->
+                    </div><!-- /.card -->
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="card" data-background-image="assets/img/tmp/product-2.jpg">
+                        <div class="card-label">
+                            <a href="listing-detail.html">Vacation</a>
+                        </div><!-- /.card-label -->
+
+                        <div class="card-content">
+                            <h2><a href="listing-detail.html">Homemade Coffee</a></h2>
+
+                            <div class="card-meta">
+                                <i class="fa fa-map-o"></i> 347/26 22th Avenue, NYC USA
+                            </div><!-- /.card-meta -->
+
+                            <div class="card-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-actions">
+                                <a href="#" class="fa fa-bookmark-o marked"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div>
+                        </div><!-- /.card-content -->
+                    </div><!-- /.card -->
+                </div><!-- /.col-* -->
+            </div><!-- /.row -->
+        </div><!-- /.col-* -->
+
+        <div class="col-sm-4">
+            <div class="card card-tall" data-background-image="assets/img/tmp/product-1.jpg">
+                <div class="card-label">
+                    <a href="listing-detail.html">Vacation</a>
+                </div><!-- /.card-label -->
+
+                <div class="card-content">
+                    <h2><a href="listing-detail.html">Trip to Paris, France</a></h2>
+
+                    <div class="card-meta">
+                        <i class="fa fa-map-o"></i> 347/26 22th Avenue, NYC USA
+                    </div><!-- /.card-meta -->
+
+                    <div class="card-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div><!-- /.card-rating -->
+
+                    <div class="card-actions">
+                        <a href="#" class="fa fa-bookmark-o"></a>
+                        <a href="listing-detail.html" class="fa fa-search"></a>
+                        <a href="#" class="fa fa-heart-o marked"></a>
+                    </div>
+                </div><!-- /.card-content -->
+            </div><!-- /.card -->
+        </div><!-- /.col-* -->
+    </div><!-- /.row -->
+</div><!-- /.cards-wrapper -->
+
+    </div>
+
+
+    <div class="block background-secondary fullwidth mt80 mb-80 pt60 pb60">
+        <div class="row">
+    <div class="col-sm-12">
+        <div class="contact-info-wrapper">
+            <h2>Do You Have Any Questions?</h2>
+
+            <div class="contact-info">
+                <span class="contact-info-item">
+                    <i class="fa fa-at"></i>
+                    <span>support@sitename.com</span>
+                </span><!-- /.contact-info-item -->
+
+                <span class="contact-info-item">
+                    <i class="fa fa-phone"></i>
+                    <span>+123-456-789</span>
+                </span><!-- /.contact-info-item -->
+            </div><!-- /.contact-info-->
+        </div><!-- /.contact-info-wrapper -->
+    </div><!-- /.col-* -->
+</div><!-- /.row -->
+
+    </div>
+</div><!-- /.container -->
+
+            </div><!-- /.content -->
+        </div><!-- /.main-inner -->

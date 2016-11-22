@@ -1,0 +1,126 @@
+<div class="main-inner">
+    <div class="container">
+        <div class="content">
+
+            <div class="document-title">
+                <h1>Wedding packages</h1>
+            </div><!-- /.document-title -->
+
+            <form #searchForm="ngForm" novalidate class="form-horizontal">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4">
+                        <div class="form-group">
+                            <input type="text" placeholder="Keyword" class="form-control">
+                        </div><!-- /.form-group -->
+                    </div><!-- /.col-* -->
+
+                    <div class="col-sm-12 col-md-4">
+                        <div class="form-group">
+                            <select name="country" class="form-control" [(ngModel)]="searchFilter.countryId" #country="ngModel" title="Select Location">
+                                <option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}</option>
+                            </select>
+                        </div><!-- /.form-group -->
+                    </div><!-- /.col-* -->
+
+                    <div class="col-sm-12 col-md-4">
+                        <div class="form-group">
+                           <input type="number" name="maxPrice" class="form-control" placeholder="Max price"
+                                [(ngModel)]="searchFilter.maxPrice" #maxPrice="ngModel" />
+                        </div><!-- /.form-group -->
+                    </div><!-- /.col-* -->
+                </div><!-- /.row -->
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="filter-actions">
+                            <a href="#"><i class="fa fa-close"></i> Reset Filter</a>
+                        </div><!-- /.filter-actions -->
+                    </div><!-- /.col-* -->
+
+                    <div class="col-sm-4">
+                        <button id="searchButton" (click)="search()" type="submit" data-loading-text="Just a sec..."
+				            class="btn btn-primary" >Search</button>
+                    </div><!-- /.col-* -->
+                </div><!-- /.row -->
+            </form>
+
+
+            <h2 class="page-title">
+                <form method="get" action="?" class="filter-sort">
+                    <div class="form-group">
+                        <select title="Sort by">
+                            <option name="price">Package name</option>
+                            <option name="rating">Country</option>
+                            <option name="title">Agency name</option>
+                            <option name="title">Package price</option>
+                        </select>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        <select title="Order">
+                            <option name="ASC">Asc</option>
+                            <option name="DESC">Desc</option>
+                        </select>
+                    </div><!-- /.form-group -->
+                </form>
+            </h2><!-- /.page-title -->
+
+            <div class="cards-row" *ngIf="packages">
+
+                <div class="card-row" *ngFor="let package of packages?.list">
+                    <div class="card-row-inner">
+                        <div class="card-row-image" data-background-image="assets/img/tmp/product-1.jpg">
+
+                        </div><!-- /.card-row-image -->
+
+                        <div class="card-row-body">
+                            <h2 class="card-row-title">
+                               <a [routerLink]="['/agency', package.weddingAgency.seolink]" [queryParams]="{ package: package.id }">{{package.name}}</a>
+                            </h2>
+                            <div class="card-row-content"><p>And why did 'I' have to take a cab? Bender, quit destroying
+                                the universe! I've been there. My folks were always on me to groom myself and...</p>
+                            </div><!-- /.card-row-content -->
+                        </div><!-- /.card-row-body -->
+
+                        <div class="card-row-properties">
+                            <dl>
+
+                                <dd>Price</dd>
+                                <dt>{{package.price}} EUR</dt>
+
+
+                                <dd>Agency</dd>
+                                <dt>{{package.weddingAgency.name}}</dt>
+
+
+                                <dd>Location</dd>
+                                <dt>{{package.weddingAgency.country.name}}</dt>
+                            </dl>
+                        </div><!-- /.card-row-properties -->
+                    </div><!-- /.card-row-inner -->
+                </div><!-- /.card-row -->
+
+            </div><!-- /.cards-row -->
+
+
+            <div class="pager">
+                <ul>
+                    <li [class.disabled]="packages?.currentPage == 0">
+                        <a href="javascript:void(0)" (click)="changePage(packages?.currentPage - 1)">&laquo; Prev</a>
+                    </li>
+                    <li class="active">
+                        <a href="javascript:void(0)">{{packages.currentPage + 1}}</a>
+                    </li>
+                    <li [class.disabled]="packages?.currentPage == (packages.lastPage - 1)">
+                        <a href="javascript:void(0)" (click)="changePage(packages?.currentPage + 1)">Next &raquo;</a>
+                    </li>
+                </ul>
+            </div><!-- /.pagination -->
+
+
+        </div><!-- /.content -->
+    </div><!-- /.container -->
+</div>
+<!-- /.main-inner -->

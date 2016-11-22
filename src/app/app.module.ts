@@ -4,6 +4,7 @@ import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 import { RouterModule }  from '@angular/router';
 
+import {FrontpageComponent} from "./components/frontpage";
 import {AgencyDetailsComponent} from "./components/agencyDetails";
 import {routes} from "./app.routes";
 import {AppComponent} from "./app.component";
@@ -14,7 +15,7 @@ import {PackageSearchComponent} from "./components/packageSearch";
 
 @NgModule({
     imports:      [ BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(routes) ],
-    declarations: [ AppComponent, NavigationComponent, PackageSearchComponent, AgencyDetailsComponent, SecureAgenciesComponent, EditAgencyComponent ],
+    declarations: [ AppComponent, FrontpageComponent, NavigationComponent, PackageSearchComponent, AgencyDetailsComponent, SecureAgenciesComponent, EditAgencyComponent ],
     bootstrap:    [ AppComponent, NavigationComponent ]
 })
 export class AppModule { }
