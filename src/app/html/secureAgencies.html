@@ -1,40 +1,52 @@
-<div class="table-responsive">
-	<table class="table table-hover">
-		<tr>
-			<th>Name</th>
-			<th>Country</th>
-			<th></th>
-		</tr>
-		<tr *ngFor="let agency of agencies?.list">
-			<td>{{agency.name}}</td>
-			<td>{{agency.country.name}}</td>
-			<td>
-				<a [routerLink]="['/secure/agency', agency.id]">Details</a> |
-				<a href="javascript:void(0)" (click)="deleteAgency(agency)">Delete</a>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2"></td>
-			<td>
-				<a routerLink="/secure/agency/new">New Agency</a>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3">
-				<div class="pull-right">
-					<ul class="pagination">
-						<li [class.disabled]="agencies?.currentPage == 0">
-							<a href="javascript:void(0)" (click)="searchAgencies(agencies?.currentPage - 1)">&laquo; Prev</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)">{{agencies.currentPage + 1}}</a>
-						</li>
-						<li [class.disabled]="agencies?.currentPage == (agencies.lastPage - 1)">
-							<a href="javascript:void(0)" (click)="searchAgencies(agencies?.currentPage + 1)">Next &raquo;</a>
-						</li>
-					</ul>
-				</div>
-			</td>
-		</tr>
-	</table>
+<div>
+  <div class="content">
+    <div class="container">
+      <div class="row detail-content">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <tr>
+              <th>Name</th>
+              <th>Country</th>
+              <th></th>
+            </tr>
+            <tr *ngFor="let agency of agencies?.list">
+              <td>{{agency.name}}</td>
+              <td>{{agency.country.name}}</td>
+              <td>
+                <a [routerLink]="['/secure/agency', agency.id]">Details</a> |
+                <a href="javascript:void(0)" (click)="deleteAgency(agency)">Delete</a>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2"></td>
+              <td>
+                  <div class="header-action">
+                      <a routerLink="/secure/agency/new" class="header-action-inner" title="Add Agency" data-toggle="tooltip" data-placement="bottom">
+                          <i class="fa fa-plus"></i>
+                      </a><!-- /.header-action-inner -->
+                  </div><!-- /.header-action -->
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="pull-right">
+                  <ul class="pagination">
+                    <li [class.disabled]="agencies?.currentPage == 0">
+                      <a href="javascript:void(0)" (click)="searchAgencies(agencies?.currentPage - 1)">&laquo; Prev</a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0)">{{agencies.currentPage + 1}}</a>
+                    </li>
+                    <li [class.disabled]="agencies?.currentPage == (agencies.lastPage - 1)">
+                      <a href="javascript:void(0)" (click)="searchAgencies(agencies?.currentPage + 1)">Next &raquo;</a>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

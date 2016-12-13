@@ -22,7 +22,8 @@ export class AgencyDetailsComponent implements OnInit {
     public agency : Agency;
     public categories : Category[];
     public attributes : Attribute[];
-    public images : Image[];
+    public images : Image[] = [];
+    public firstImage : Image;
     public activePackage: string;
 
     constructor(private agenciesService: AgenciesService,
@@ -48,8 +49,9 @@ export class AgencyDetailsComponent implements OnInit {
                 this.imagesService.getThumbnails(this.agency.id)
                     .subscribe(images => {
                         this.images = images;
+                        this.firstImage = this.images.length > 0 ? this.images[0] : new Image();
                         this.changeDetector.detectChanges();
-                        initFotorama();
+                        initGallery(this.images.length);
                     });
             });
     }
@@ -64,11 +66,27 @@ export class AgencyDetailsComponent implements OnInit {
     }
 }
 
-function initFotorama() {
-    $('.fotorama').find('a').each(function() {
-        $(this).prop('data-thumb', $(this).prop('title'));
+function initGallery(size) {
+    /**
+     * Detail gallery
+     */
+    if ($('.detail-gallery-index').length != 0) {
+        $('.detail-gallery-index').owlCarousel({
+            items: size,
+            nav: true,
+            dots: true,
+            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>']
+        });
+    }
+
+    $('.detail-gallery-list-item a').on('click', function(e) {
+        e.preventDefault();
+        var link = $(this).data('target');
+        $('.detail-gallery-preview img').attr('src', link);
+        $('.detail-gallery-preview a').attr('href', link);
     });
-    $('.fotorama').fotorama();
+
+    $('.detail-gallery-preview a').colorbox({photo: true, maxWidth:'95%', maxHeight:'95%'});
 }
 
 function initMasonryForCurrentPackage(packageId) {

@@ -8,7 +8,7 @@ export class NotificationComponent {
             '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">&nbsp;</span>' +
             '<span id="errorMessage">' + message + '</span>' +
             '</div>';
-        $(html).insertBefore('.main');
+        $(html).insertBefore($('.main').first());
     }
 
     public showInfo(message: String): void {
@@ -17,7 +17,7 @@ export class NotificationComponent {
             '<a href="#" class="close" data-dismiss="alert">&times;</a>' +
             '<strong>Success!</strong> <span id="infoMessage">' + message + '</span>' +
             '</div>';
-        $(html).insertBefore('.main');
+        $(html).insertBefore($('.main').first());
     }
 
     public hideErrors(): void {

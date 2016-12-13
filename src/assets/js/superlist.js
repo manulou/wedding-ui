@@ -100,26 +100,26 @@ $(document).ready(function() {
     /**
      * Colorbox
      */
-    $('.detail-gallery-preview a').colorbox();
-
-    /**
-     * Detail gallery
-     */
-    if ($('.detail-gallery-index').length != 0) {
-        $('.detail-gallery-index').owlCarousel({
-            items: 5,
-            nav: true,
-            dots: true,
-            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>']
-        });
-    }
-
-    $('.detail-gallery-list-item a').on('click', function(e) {
-        e.preventDefault();
-        var link = $(this).data('target');
-        $('.detail-gallery-preview img').attr('src', link);
-        $('.detail-gallery-preview a').attr('href', link);
-    });
+    // $('.detail-gallery-preview a').colorbox();
+    //
+    // /**
+    //  * Detail gallery
+    //  */
+    // if ($('.detail-gallery-index').length != 0) {
+    //     $('.detail-gallery-index').owlCarousel({
+    //         items: 5,
+    //         nav: true,
+    //         dots: true,
+    //         navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>']
+    //     });
+    // }
+    //
+    // $('.detail-gallery-list-item a').on('click', function(e) {
+    //     e.preventDefault();
+    //     var link = $(this).data('target');
+    //     $('.detail-gallery-preview img').attr('src', link);
+    //     $('.detail-gallery-preview a').attr('href', link);
+    // });
 
     /**
      * Listing Detail Map

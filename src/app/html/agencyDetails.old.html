@@ -1,0 +1,73 @@
+<div class="main">
+
+    <h1>{{agency?.name}}</h1>
+
+    <div class="row">
+        <div class="col-md-3">
+            <label class="control-label">Country:</label>
+            {{agency?.country.name}}
+        </div>
+        <div class="col-md-3">
+            <label class="control-label">Email:</label>
+            {{agency?.email}}
+        </div>
+        <div class="col-md-3">
+            <label class="control-label">Website:</label>
+            <a href="{{agency?.website}}" target="_blank">{{agency?.website}}</a>
+        </div>
+        <div class="col-md-3">
+            <label class="control-label">Phone:</label>
+            {{agency?.phone}}
+        </div>
+    </div>
+    <ng-container *ngFor="let package of agency?.packages">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <h2><a href="javascript:;" onclick="togglePackage(this)">{{package.name}}</a></h2>
+            </div>
+            <div class="col-md-6 text-right">
+                <h2><a href="javascript:;" onclick="togglePackage(this)">{{package.price}} EUR</a></h2>
+            </div>
+        </div>
+        <div class="row" id="packageRow{{package.id}}" [ngClass]="{'hidden': activePackage != package.id}">
+            <div class="categories">
+                <ng-container *ngFor="let category of categories">
+                    <div class="col-md-3 col-xs-12 col-sm-4 category" *ngIf="hasAttributesForCategory(package, category)">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{category.name}}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="list-group text-left">
+                                    <ng-container *ngFor="let packageAttribute of package.attributes">
+                                        <li class="list-group-item" *ngIf="packageAttribute.category.id == category.id">
+                                            <span class="progress-bar-success badge">
+                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                            </span>
+                                            {{packageAttribute.attribute.name}}
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                                <ul class="list-group text-left" [hidden]="hasAttributesForCategory(package, category)">
+                                    <li class="list-group-item">
+                                        <span class="progress-bar-danger badge">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </span>
+                                        Not available
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <hr class="col-md-12" />
+    </ng-container>
+    <div class="fotorama" data-width="100%" data-ratio="800/600" data-nav="thumbs" data-autoplay="3000">
+        <a href="/image/{{image.relatedImageId}}" title="/image/{{image.id}}" *ngFor="let image of images"></a>
+    </div>
+</div>
+<div class="col-md-12 text-center">
+    <button id="backButton" class="btn btn-primary btn-lg" routerLink="/">Back</button>
+</div>
