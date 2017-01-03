@@ -44,6 +44,11 @@ export class AgenciesService {
             .map((response: Response) => <Agency>response.json()).catch(this.handleError);
     }
 
+    public getSecure = (id: number): Observable<Agency> => {
+        return this._http.get(this.configuration.SecureServerWithApiUrl + 'getAgency/' + id)
+            .map((response: Response) => <Agency>response.json()).catch(this.handleError);
+    }
+
     public getBySeolink = (seolink: string): Observable<Agency> => {
         return this._http.get(this.configuration.ServerWithApiUrl + 'getAgencyBySeolink/' + seolink)
             .map((response: Response) => <Agency>response.json()).catch(this.handleError);

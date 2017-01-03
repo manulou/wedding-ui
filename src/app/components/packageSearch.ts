@@ -58,6 +58,10 @@ export class PackageSearchComponent implements OnInit {
         this.searchFilter = PackageSearchComponent.searchState.searchFilter;
     }
 
+    public getListImage(pkg): string {
+        return `url('/api/agency/${pkg.weddingAgency.id}/list')`;
+    }
+
     private changePage(pageNumber : number): void {
         if (pageNumber >= 0 && pageNumber < this.packages.lastPage) {
             this.pageInfo.page = pageNumber;

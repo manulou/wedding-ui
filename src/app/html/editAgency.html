@@ -1,194 +1,245 @@
 <div>
-  <div class="content">
-    <div class="container">
-      <div class="row detail-content">
-        <div class="main">
-          <div class="col-xs-6">
-            <h1>
-              Edit Agency: {{agency.name}}
-            </h1>
-          </div>
-          <div class="col-xs-6">
-            <h1 class="text-right">
-              <input type="checkbox" name="agencyVisible" [(ngModel)]="agency.visible" #agencyVisible="ngModel"/>
-              Visible
-            </h1>
-          </div>
-
-          <form #agencyForm="ngForm" novalidate class="form-horizontal" enctype="multipart/form-data">
-            <div *ngIf="agencyForm.invalid" class="form-group">
-              <label class="control-label has-error col-xs-12">The form has errors, please correct them</label>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-1 control-label" [ngClass]="{'has-error' : name.dirty && name.invalid}">Name</label>
-              <div class="col-xs-11 col-md-3" [ngClass]="{'has-error' : name.dirty && name.invalid}">
-                <input type="text" name="name" class="form-control" [(ngModel)]="agency.name" required #name="ngModel"/>
-              </div>
-              <label class="col-sm-1 control-label"
-                     [ngClass]="{'has-error': country.dirty && country.invalid}">Country</label>
-              <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': country.dirty && country.invalid}">
-                <select name="country" class="form-control" [(ngModel)]="agency.country.id" required #country="ngModel">
-                  <option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}</option>
-                </select>
-              </div>
-                <label class="col-sm-1 control-label" [ngClass]="{'has-error': city.dirty && city.invalid}">City</label>
-                <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': city.dirty && city.invalid}">
-                    <input type="text" name="city" class="form-control" [(ngModel)]="agency.city" required #city="ngModel"/>
-                </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-1 control-label"
-                     [ngClass]="{'has-error': email.dirty && email.invalid}">Email</label>
-              <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': email.dirty && email.invalid}">
-                <input type="email" name="email" class="form-control" [(ngModel)]="agency.email" required
-                       #email="ngModel"/>
-              </div>
-              <label class="col-sm-1 control-label"
-                     [ngClass]="{'has-error': website.dirty && website.invalid}">Website</label>
-              <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': website.dirty && website.invalid}">
-                <input type="text" name="website" class="form-control" [(ngModel)]="agency.website" #website="ngModel"/>
-              </div>
-              <label class="col-sm-1 control-label"
-                     [ngClass]="{'has-error': phone.dirty && phone.invalid}">Phone</label>
-              <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': phone.dirty && phone.invalid}">
-                <input type="text" name="phone" class="form-control" [(ngModel)]="agency.phone" #phone="ngModel"/>
-              </div>
-            </div>
-              <div class="form-group">
-                  <label class="col-sm-1 control-label"
-                         [ngClass]="{'has-error': facebook.dirty && facebook.invalid}">Facebook</label>
-                  <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': facebook.dirty && facebook.invalid}">
-                      <input type="text" name="facebook" class="form-control" [(ngModel)]="agency.facebook" #facebook="ngModel"/>
-                  </div>
-                  <label class="col-sm-1 control-label"
-                         [ngClass]="{'has-error': twitter.dirty && twitter.invalid}">Twitter</label>
-                  <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': twitter.dirty && twitter.invalid}">
-                      <input type="text" name="twitter" class="form-control" [(ngModel)]="agency.twitter" #twitter="ngModel"/>
-                  </div>
-                  <label class="col-sm-1 control-label"
-                         [ngClass]="{'has-error': instagram.dirty && instagram.invalid}">Instagram</label>
-                  <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': instagram.dirty && instagram.invalid}">
-                      <input type="text" name="instagram" class="form-control" [(ngModel)]="agency.instagram" #instagram="ngModel"/>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <div class="col-xs-12">
-                      <textarea name="description" class="form-control" rows="6" placeholder="Type in the agency description" [(ngModel)]="agency.description" #description="ngModel"></textarea>
-                  </div>
-              </div>
-            <hr/>
-            <ng-container *ngFor="let package of agency?.packages">
-              <div class="form-group" *ngIf="id != null">
-                <h2 class="col-md-12">{{package.name}}</h2>
-                <label class="col-sm-1 control-label"
-                       [ngClass]="{'has-error': packageName.dirty && packageName.invalid}">Package name</label>
-                <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': packageName.dirty && packageName.invalid}">
-                  <input type="text" name="packageName" class="form-control" [(ngModel)]="package.name" required
-                         #packageName="ngModel"/>
-                </div>
-                <label class="col-sm-1 control-label"
-                       [ngClass]="{'has-error': packagePrice.dirty && packagePrice.invalid}">Price</label>
-                <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': packagePrice.dirty && packagePrice.invalid}">
-                  <input type="number" name="packagePrice" class="form-control" [(ngModel)]="package.price"
-                         #packagePrice="ngModel"/>
-                </div>
-                <div class="col-sm-2 text-left">
-                  <input type="checkbox" name="packageVisible" [(ngModel)]="package.visible"/> Visible
-                </div>
-                <div class="col-xs-11 col-md-2 text-left">
-                  <a href="javascript:;" class="btn btn-danger" (click)="deletePackage(package)" role="button">Delete
-                    package</a>
-                </div>
-              </div>
-
-              <ng-container *ngFor="let category of categories">
-                <div class="form-group" *ngIf="id != null">
-                  <label class="col-sm-1 control-label">Category:</label>
-                  <h4 class="col-md-3 text-left" style="font-weight: bold; color: #009f8b">{{category.name}}</h4>
-
-                  <label class="col-sm-1 control-label">New attribute:</label>
-                  <div class="col-xs-11 col-md-3">
-                    <input type="text" class="form-control" name="newAttributeName"
-                           [(ngModel)]="newAttribute.attribute.name"/>
-                  </div>
-                  <div class="col-xs-12 col-md-4 text-left">
-                    <a href="javascript:;" class="btn btn-primary"
-                       (click)="addAttribute(newAttribute, package, category)" role="button">Add attribute</a>
-                  </div>
-                </div>
-                <div class="form-group" *ngIf="id != null">
-                  <ng-container *ngFor="let attribute of attributes">
-                    <div class="col-sm-2 text-left" *ngIf="attribute.categoryId == category.id">
-                      <input type="checkbox" [checked]="packageHasAttribute(package, attribute)"
-                             (click)="toggleAttributeInPackage(attribute, package, category)"/> {{attribute.name}}
+    <div class="content">
+        <div class="container">
+            <div class="row detail-content">
+                <div class="main">
+                    <div class="col-xs-6">
+                        <h1>
+                            Edit Agency: {{agency.name}}
+                        </h1>
                     </div>
-                  </ng-container>
-                </div>
-                <hr/>
-              </ng-container>
-              <hr/>
-            </ng-container>
-            <div class="form-group" *ngIf="agency.id != null">
-              <label class="col-sm-1 control-label">Package name</label>
-              <div class="col-xs-11 col-md-3">
-                <input type="text" name="newPackageName" class="form-control" [(ngModel)]="newPackage.name"/>
-              </div>
-              <label class="col-sm-1 control-label">Price</label>
-              <div class="col-xs-11 col-md-3">
-                <input type="number" name="newPackagePrice" class="form-control" [(ngModel)]="newPackage.price"/>
-              </div>
-              <div class="col-xs-11 col-md-4 text-left">
-                <a href="javascript:;" class="btn btn-success" (click)="addPackage(newPackage)" role="button">Add
-                  package</a>
-              </div>
-            </div>
-            <div class="form-group" *ngIf="agency.id != null">
-              <label class="col-sm-1 control-label">Category name</label>
-              <div class="col-xs-11 col-md-3">
-                <input type="text" name="newCategoryName" class="form-control" [(ngModel)]="newCategory.name"/>
-              </div>
-              <div class="col-xs-11 col-md-8 text-left">
-                <a href="javascript:;" class="btn btn-success" (click)="addCategory(newCategory)" role="button">Add
-                  category</a>
-              </div>
-            </div>
-            <h4 class="dragAndDropSupported">Drag and drop images below</h4>
-            <div *ngIf="agency.id != null" class="ng-hide" class="form-group dragAndDropSupported">
-              <label class="col-sm-1 control-label"></label>
-              <div class="col-xs-12 col-md-11">
-                <div class="upload-drop-zone" id="drop-zone">Just drag and drop images here</div>
+                    <div class="col-xs-6">
+                        <h1 class="text-right">
+                            <input type="checkbox" name="agencyVisible" [(ngModel)]="agency.visible"
+                                   #agencyVisible="ngModel"/>
+                            Visible
+                        </h1>
+                    </div>
 
-                <div class="progress" style="display:none">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-                       style="width: 0%;">
-                    <span class="sr-only">0% Complete</span>
-                  </div>
+                    <form #agencyForm="ngForm" novalidate class="form-horizontal" enctype="multipart/form-data">
+                        <div *ngIf="agencyForm.invalid" class="form-group">
+                            <label class="control-label has-error col-xs-12">The form has errors, please correct
+                                them</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label"
+                                   [ngClass]="{'has-error' : name.dirty && name.invalid}">Name</label>
+                            <div class="col-xs-11 col-md-3" [ngClass]="{'has-error' : name.dirty && name.invalid}">
+                                <input type="text" name="name" class="form-control" [(ngModel)]="agency.name" required
+                                       #name="ngModel"/>
+                            </div>
+                            <label class="col-sm-1 control-label"
+                                   [ngClass]="{'has-error': country.dirty && country.invalid}">Country</label>
+                            <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': country.dirty && country.invalid}">
+                                <select name="country" class="form-control" [(ngModel)]="agency.country.id" required
+                                        #country="ngModel">
+                                    <option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <label class="col-sm-1 control-label" [ngClass]="{'has-error': city.dirty && city.invalid}">City</label>
+                            <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': city.dirty && city.invalid}">
+                                <input type="text" name="city" class="form-control" [(ngModel)]="agency.city" required
+                                       #city="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label"
+                                   [ngClass]="{'has-error': email.dirty && email.invalid}">Email</label>
+                            <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': email.dirty && email.invalid}">
+                                <input type="email" name="email" class="form-control" [(ngModel)]="agency.email"
+                                       required
+                                       #email="ngModel"/>
+                            </div>
+                            <label class="col-sm-1 control-label"
+                                   [ngClass]="{'has-error': website.dirty && website.invalid}">Website</label>
+                            <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': website.dirty && website.invalid}">
+                                <input type="text" name="website" class="form-control" [(ngModel)]="agency.website"
+                                       #website="ngModel"/>
+                            </div>
+                            <label class="col-sm-1 control-label"
+                                   [ngClass]="{'has-error': phone.dirty && phone.invalid}">Phone</label>
+                            <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': phone.dirty && phone.invalid}">
+                                <input type="text" name="phone" class="form-control" [(ngModel)]="agency.phone"
+                                       #phone="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label"
+                                   [ngClass]="{'has-error': facebook.dirty && facebook.invalid}">Facebook</label>
+                            <div class="col-xs-11 col-md-3"
+                                 [ngClass]="{'has-error': facebook.dirty && facebook.invalid}">
+                                <input type="text" name="facebook" class="form-control" [(ngModel)]="agency.facebook"
+                                       #facebook="ngModel"/>
+                            </div>
+                            <label class="col-sm-1 control-label"
+                                   [ngClass]="{'has-error': twitter.dirty && twitter.invalid}">Twitter</label>
+                            <div class="col-xs-11 col-md-3" [ngClass]="{'has-error': twitter.dirty && twitter.invalid}">
+                                <input type="text" name="twitter" class="form-control" [(ngModel)]="agency.twitter"
+                                       #twitter="ngModel"/>
+                            </div>
+                            <label class="col-sm-1 control-label"
+                                   [ngClass]="{'has-error': instagram.dirty && instagram.invalid}">Instagram</label>
+                            <div class="col-xs-11 col-md-3"
+                                 [ngClass]="{'has-error': instagram.dirty && instagram.invalid}">
+                                <input type="text" name="instagram" class="form-control" [(ngModel)]="agency.instagram"
+                                       #instagram="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <textarea name="description" class="form-control" rows="6"
+                                          placeholder="Type in the agency description" [(ngModel)]="agency.description"
+                                          #description="ngModel"></textarea>
+                            </div>
+                        </div>
+                        <hr/>
+                        <ng-container *ngFor="let package of agency?.packages">
+                            <div class="form-group" *ngIf="id != null">
+                                <h2 class="col-md-12">{{package.name}}</h2>
+                                <label class="col-sm-1 control-label"
+                                       [ngClass]="{'has-error': packageName.dirty && packageName.invalid}">Package
+                                    name</label>
+                                <div class="col-xs-11 col-md-3"
+                                     [ngClass]="{'has-error': packageName.dirty && packageName.invalid}">
+                                    <input type="text" name="packageName{{package.id}}" class="form-control"
+                                           [(ngModel)]="package.name" required
+                                           #packageName="ngModel"/>
+                                </div>
+                                <label class="col-sm-1 control-label"
+                                       [ngClass]="{'has-error': packagePrice.dirty && packagePrice.invalid}">Price</label>
+                                <div class="col-xs-11 col-md-3"
+                                     [ngClass]="{'has-error': packagePrice.dirty && packagePrice.invalid}">
+                                    <input type="number" name="packagePrice{{package.id}}" class="form-control"
+                                           [(ngModel)]="package.price"
+                                           #packagePrice="ngModel"/>
+                                </div>
+                                <div class="col-sm-2 text-left">
+                                    <input type="checkbox" name="packageVisible{{package.id}}" [(ngModel)]="package.visible"/> Visible
+                                </div>
+                                <div class="col-xs-11 col-md-2 text-left">
+                                    <a href="javascript:;" class="btn btn-danger" (click)="deletePackage(package)"
+                                       role="button">Delete
+                                        package</a>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <textarea name="packageDescription{{package.id}}" class="form-control" rows="3"
+                                              placeholder="Type in the package description"
+                                              [(ngModel)]="package.description"
+                                              #packageDescription="ngModel"></textarea>
+                                </div>
+                            </div>
+
+                            <ng-container *ngFor="let category of categories">
+                                <div class="form-group" *ngIf="id != null">
+                                    <label class="col-sm-1 control-label">Category:</label>
+                                    <h4 class="col-md-3 text-left" style="font-weight: bold; color: #009f8b">
+                                        {{category.name}}</h4>
+
+                                    <label class="col-sm-1 control-label">New attribute:</label>
+                                    <div class="col-xs-11 col-md-3">
+                                        <input type="text" class="form-control" name="newAttributeName"
+                                               [(ngModel)]="newAttribute.attribute.name"/>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4 text-left">
+                                        <a href="javascript:;" class="btn btn-primary"
+                                           (click)="addAttribute(newAttribute, package, category)" role="button">Add
+                                            attribute</a>
+                                    </div>
+                                </div>
+                                <div class="form-group" *ngIf="id != null">
+                                    <ng-container *ngFor="let attribute of attributes">
+                                        <div class="col-sm-2 text-left" *ngIf="attribute.categoryId == category.id">
+                                            <input type="checkbox" [checked]="packageHasAttribute(package, attribute)"
+                                                   (click)="toggleAttributeInPackage(attribute, package, category)"/>
+                                            {{attribute.name}}
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                <hr/>
+                            </ng-container>
+                            <hr/>
+                        </ng-container>
+                        <div class="form-group" *ngIf="agency.id != null">
+                            <label class="col-sm-1 control-label">Package name</label>
+                            <div class="col-xs-11 col-md-3">
+                                <input type="text" name="newPackageName" class="form-control"
+                                       [(ngModel)]="newPackage.name"/>
+                            </div>
+                            <label class="col-sm-1 control-label">Price</label>
+                            <div class="col-xs-11 col-md-3">
+                                <input type="number" name="newPackagePrice" class="form-control"
+                                       [(ngModel)]="newPackage.price"/>
+                            </div>
+                            <div class="col-xs-11 col-md-4 text-left">
+                                <a href="javascript:;" class="btn btn-success" (click)="addPackage(newPackage)"
+                                   role="button">Add
+                                    package</a>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="agency.id != null">
+                            <label class="col-sm-1 control-label">Category name</label>
+                            <div class="col-xs-11 col-md-3">
+                                <input type="text" name="newCategoryName" class="form-control"
+                                       [(ngModel)]="newCategory.name"/>
+                            </div>
+                            <div class="col-xs-11 col-md-8 text-left">
+                                <a href="javascript:;" class="btn btn-success" (click)="addCategory(newCategory)"
+                                   role="button">Add
+                                    category</a>
+                            </div>
+                        </div>
+                        <h4 *ngIf="agency.id != null" class="dragAndDropSupported">Drag and drop images below</h4>
+                        <div *ngIf="agency.id != null" class="ng-hide" class="form-group dragAndDropSupported">
+                            <label class="col-sm-1 control-label"></label>
+                            <div class="col-xs-12 col-md-11">
+                                <div class="upload-drop-zone" id="drop-zone">Just drag and drop images here</div>
+
+                                <div class="progress" style="display:none">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                         aria-valuemax="100"
+                                         style="width: 0%;">
+                                        <span class="sr-only">0% Complete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3" *ngFor="let image of images">
+                                <div class="thumbnail">
+                                    <a href="/api/image/{{image.relatedImageId}}" target="_blank">
+                                        <img [src]="'/api/image/' + image.id" alt="{{image.name}}"/>
+                                    </a>
+                                </div>
+                                <div class="caption">
+                                    <p>
+                                        <span *ngIf="image.spread">
+                                            <input type="checkbox" disabled checked />Spread [wide]
+                                        </span>
+                                        <span *ngIf="image.list">
+                                            <input type="checkbox" disabled checked />Main [260x200]
+                                        </span>
+                                        <a href="javascript:;" class="btn btn-danger" (click)="deleteImage(image)"
+                                           role="button">Delete</a>
+                                        <a href="javascript:;" class="btn btn-success" (click)="setSpread(image)"
+                                           role="button" *ngIf="!image.spread && !image.list">Spread</a>
+                                        <a href="javascript:;" class="btn btn-success" (click)="setList(image)"
+                                           role="button" *ngIf="!image.spread && !image.list">Main</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button id="backButton" class="btn btn-primary btn-lg" routerLink="/secure">Back</button>
+                            <button id="submitButton" (click)="save(agency)" type="submit"
+                                    data-loading-text="Just a sec..."
+                                    class="btn btn-success btn-lg">Save
+                            </button>
+                        </div>
+                    </form>
                 </div>
-              </div>
             </div>
-            <div class="form-group">
-              <div class="col-sm-2" *ngFor="let image of images">
-                <div class="thumbnail">
-                  <a href="/api/image/{{image.relatedImageId}}" target="_blank">
-                    <img [src]="'/api/image/' + image.id" alt="{{image.name}}"/>
-                  </a>
-                </div>
-                <div class="caption">
-                  <p>
-                    <a href="javascript:;" class="btn btn-danger" (click)="deleteImage(image)" role="button">Delete</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <button id="backButton" class="btn btn-primary btn-lg" routerLink="/secure">Back</button>
-              <button id="submitButton" (click)="save(agency)" type="submit" data-loading-text="Just a sec..."
-                      class="btn btn-success btn-lg">Save
-              </button>
-            </div>
-          </form>
         </div>
-      </div>
     </div>
-  </div>
 </div>

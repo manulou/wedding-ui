@@ -33,6 +33,14 @@ export class ImagesService {
             .map((response: Response) => <Image>response.json()).catch(this.handleError);
     }
 
+    public setSpread = (id: number): Observable<void> => {
+        return this._http.put(this.configuration.SecureServerWithApiUrl + 'image/spread/' + id, {}).catch(this.handleError);
+    }
+
+    public setList = (id: number): Observable<void> => {
+        return this._http.put(this.configuration.SecureServerWithApiUrl + 'image/list/' + id, {}).catch(this.handleError);
+    }
+
     public delete = (id: number): Observable<void> => {
         return this._http.delete(this.configuration.SecureServerWithApiUrl + 'deleteImage/' + id).catch(this.handleError);
     }

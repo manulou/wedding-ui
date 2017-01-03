@@ -1,7 +1,7 @@
         <div class="main-inner">
             <div class="content">
                 <div class="mt-80 mb80">
-    <div class="detail-banner" style="background-image: url(assets/img/tmp/detail-banner-1.jpg);">
+    <div class="detail-banner" [style.background-image]="getSpreadImage()">
     <div class="container">
         <div class="detail-banner-left">
             <div class="detail-banner-info">
@@ -50,13 +50,13 @@
             <div class="detail-vcard">
                 <div class="detail-contact">
                     <div class="detail-contact-email">
-                        <i class="fa fa-envelope-o"></i> <a href="mailto:#">{{agency?.email}}</a>
+                        <i class="fa fa-envelope-o"></i> <a href="mailto:{{agency?.email}}">{{agency?.email}}</a>
                     </div>
                     <div class="detail-contact-phone">
-                        <i class="fa fa-mobile-phone"></i> <a href="tel:#">{{agency?.phone}}</a>
+                        <i class="fa fa-mobile-phone"></i> <a href="tel:{{agency?.phone}}">{{agency?.phone}}</a>
                     </div>
                     <div class="detail-contact-website">
-                        <i class="fa fa-globe"></i> <a href="#">{{agency?.website}}</a>
+                        <i class="fa fa-globe"></i> <a href="{{agency?.website}}" target="_blank">{{agency?.website}}</a>
                     </div>
                     <div class="detail-contact-address">
                         <i class="fa fa-map-o"></i>

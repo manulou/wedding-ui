@@ -68,8 +68,11 @@ export class EditAgencyComponent implements OnInit {
         if (!this.newAgency) {
             this.id = this.route.snapshot.params['id'];
             this.imagesService.getThumbnails(id)
-                .subscribe(images => this.images = images);
-            this.agenciesService.get(id)
+                .subscribe(images => {
+                    this.images = images;
+                    this.sortImages();
+                });
+            this.agenciesService.getSecure(id)
                 .subscribe(agency => {
                     this.agency = agency;
                     this.changeDetector.detectChanges();
@@ -114,6 +117,35 @@ export class EditAgencyComponent implements OnInit {
             }
         });
     };
+
+    public setSpread(imageToUpdate : Image): void {
+        this.imagesService.setSpread(imageToUpdate.id).subscribe(() => {
+            this.images.filter(image => image.id !== imageToUpdate.id).forEach(image => image.spread = false);
+            imageToUpdate.spread = true;
+            this.sortImages();
+        });
+    };
+
+    public setList(imageToUpdate : Image): void {
+        this.imagesService.setList(imageToUpdate.id).subscribe(() => {
+            this.images.filter(image => image.id !== imageToUpdate.id).forEach(image => image.list = false);
+            imageToUpdate.list = true;
+            this.sortImages();
+        });
+    };
+
+    private sortImages(): void {
+        const spreadImage = this.images.find(image => image.spread);
+        const listImage = this.images.find(image => image.list);
+
+        this.images = this.images.filter(image => image !== listImage && image !== spreadImage);
+        if (spreadImage) {
+            this.images.unshift(spreadImage);
+        }
+        if (listImage) {
+            this.images.unshift(listImage);
+        }
+    }
 
     public addPackage (newPackage : Package): void {
         if(newPackage.name != '') {

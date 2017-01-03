@@ -6,6 +6,7 @@ import {Agency} from "./agency";
 export class Package {
     public id : number;
     public name : string;
+    public description : string;
     public price : number;
     public visible : boolean;
     public attributes : PackageAttribute[];

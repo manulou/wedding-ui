@@ -56,6 +56,13 @@ export class AgencyDetailsComponent implements OnInit {
             });
     }
 
+    public getSpreadImage(): string {
+        if (this.agency) {
+            return `url('/api/agency/${this.agency.id}/spread')`;
+        }
+        return '';
+    }
+
     private hasAttributesForCategory(weddingPackage : Package, category : Category): boolean {
         for (var i = 0; i < weddingPackage.attributes.length; i++) {
             if (weddingPackage.attributes[i].category.id == category.id) {
