@@ -10607,3 +10607,6 @@ ol li {
     color: #222;
     border-color: #222;
 }
+.has-error {
+    color:red;
+}

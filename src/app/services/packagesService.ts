@@ -10,6 +10,7 @@ import {Configuration} from '../app.constants';
 import {PageInfo} from "../model/helper/pageInfo";
 import {PackagesList} from "../model/packagesList";
 import {SearchFilter} from "../model/helper/searchFilter";
+import {Package} from "../model/package";
 
 @Injectable()
 export class PackagesService {
@@ -44,6 +45,10 @@ export class PackagesService {
             .map((response: Response) => <PackagesList>response.json()).catch(this.handleError);
     }
 
+    public mostRecentPackages = (): Observable<Package[]> => {
+        return this._http.get(this.configuration.ServerWithApiUrl + 'mostRecentPackages')
+            .map((response: Response) => <Package[]>response.json()).catch(this.handleError);
+    }
 
     private handleError(error: Response) {
         console.error(error);

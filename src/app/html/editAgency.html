@@ -17,8 +17,8 @@
                     </div>
 
                     <form #agencyForm="ngForm" novalidate class="form-horizontal" enctype="multipart/form-data">
-                        <div *ngIf="agencyForm.invalid" class="form-group">
-                            <label class="control-label has-error col-xs-12">The form has errors, please correct
+                        <div *ngIf="agencyForm.dirty && agencyForm.invalid" class="form-group">
+                            <label class="control-label has-error col-xs-12" style="color: red">The form has errors, please correct
                                 them</label>
                         </div>
                         <div class="form-group">

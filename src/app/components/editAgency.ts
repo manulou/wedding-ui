@@ -95,7 +95,6 @@ export class EditAgencyComponent implements OnInit {
 
     public save(agency : Agency): void {
         if(this.agencyForm.valid) {
-            var newAgency = true;
             this.agenciesService.save(this.agency)
                 .subscribe(agency => {
                     this.notifier.showInfo('Agency was saved successfully!')
@@ -104,6 +103,10 @@ export class EditAgencyComponent implements OnInit {
                         this.router.navigate(['/secure/agency', agency.id]);
                     }
                 });
+        } else {
+            (<any>Object).values(this.agencyForm.controls)
+                .filter(control => !control.valid)
+                .forEach(control => control.markAsDirty())
         }
     };
 
