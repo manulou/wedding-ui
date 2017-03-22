@@ -9,11 +9,13 @@ import selectRedraw from "./selectRedraw";
 import {PackageSearchComponent} from "./packageSearch";
 import {Router} from "@angular/router";
 import {Package} from "../model/package";
+import {AttributesService} from "../services/attributesService";
+import {Attribute} from "../model/attribute";
 declare var $:any;
 
 @Component({
     selector: 'index',
-    providers: [PackagesService, CountriesService, Configuration],
+    providers: [PackagesService, CountriesService, AttributesService, Configuration],
     templateUrl: '../html/frontpage.html'
 })
 export class FrontpageComponent implements OnInit {
@@ -21,9 +23,11 @@ export class FrontpageComponent implements OnInit {
     public searchFilter : SearchFilter;
     public countries : Country[];
     public packages : Package[];
+    public locations : Attribute[];
 
     constructor(private packagesService: PackagesService,
                 private countriesService: CountriesService,
+                private attributesService: AttributesService,
                 private changeDetector: ChangeDetectorRef,
                 private router: Router) {}
 
@@ -33,6 +37,12 @@ export class FrontpageComponent implements OnInit {
         this.countriesService.getAllForFilter()
             .subscribe(countries => {
                 this.countries = countries;
+                this.changeDetector.detectChanges();
+                selectRedraw();
+            });
+        this.attributesService.getByCategoryName('Location')
+            .subscribe(locations => {
+                this.locations = locations;
                 this.changeDetector.detectChanges();
                 selectRedraw();
             });
@@ -48,7 +58,8 @@ export class FrontpageComponent implements OnInit {
     }
 
     private search(): boolean {
-        this.searchFilter.countryId = parseInt($('#country').val());
+        this.searchFilter.countryId = parseInt($('#country').val() === '' ? 0 : $('#country').val());
+        this.searchFilter.location = parseInt($('#location').val() === '' ? 0 : $('#location').val());
         PackageSearchComponent.searchState = new SearchState();
         PackageSearchComponent.searchState.searchFilter = this.searchFilter;
         this.router.navigate(['/search']);

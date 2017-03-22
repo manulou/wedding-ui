@@ -12,10 +12,12 @@ import {SecureAgenciesComponent} from "./components/secureAgencies";
 import {NavigationComponent} from "./components/navigation";
 import {EditAgencyComponent} from "./components/editAgency";
 import {PackageSearchComponent} from "./components/packageSearch";
+import {LoginComponent} from "./components/login";
+import {ContactComponent} from "./components/contact";
 
 @NgModule({
     imports:      [ BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(routes) ],
-    declarations: [ AppComponent, FrontpageComponent, NavigationComponent, PackageSearchComponent, AgencyDetailsComponent, SecureAgenciesComponent, EditAgencyComponent ],
+    declarations: [ AppComponent, LoginComponent, FrontpageComponent, NavigationComponent, PackageSearchComponent, AgencyDetailsComponent, SecureAgenciesComponent, EditAgencyComponent, ContactComponent ],
     bootstrap:    [ AppComponent, NavigationComponent ]
 })
 export class AppModule { }

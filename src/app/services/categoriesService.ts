@@ -21,6 +21,7 @@ export class CategoriesService {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
         this.headers.append('Accept', 'application/json');
+        this.headers.append('X-Requested-With', 'XMLHttpRequest');
     }
 
     public getAll = (): Observable<Category[]> => {
@@ -35,6 +36,6 @@ export class CategoriesService {
 
     private handleError(error: Response) {
         console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
+        return Observable.throw(error);
     }
 }

@@ -10,12 +10,14 @@ import {Attribute} from "../model/attribute";
 import {Package} from "../model/package";
 import {ImagesService} from "../services/imagesService";
 import {Image} from "../model/image";
+import {Email} from "../model/email";
+import {EmailService} from "../services/emailService";
 declare var $:any;
 declare var initMasonry:any;
 
 @Component({
     selector: 'agencyDetails',
-    providers: [AgenciesService, CategoriesService, AttributesService, ImagesService, Configuration],
+    providers: [AgenciesService, CategoriesService, AttributesService, ImagesService, EmailService, Configuration],
     templateUrl: '../html/agencyDetails.html'
 })
 export class AgencyDetailsComponent implements OnInit {
@@ -25,10 +27,13 @@ export class AgencyDetailsComponent implements OnInit {
     public images : Image[] = [];
     public firstImage : Image;
     public activePackage: string;
+    public email: Email = new Email();
+    public emailSendStatus: string = '';
 
     constructor(private agenciesService: AgenciesService,
                 private categoriesService: CategoriesService,
                 private attributesService: AttributesService,
+                private emailService: EmailService,
                 private imagesService: ImagesService,
                 private changeDetector: ChangeDetectorRef,
                 private route: ActivatedRoute) {}
@@ -70,6 +75,11 @@ export class AgencyDetailsComponent implements OnInit {
             }
         }
         return false;
+    }
+
+    private sendEmail(): void {
+        this.emailSendStatus = 'sending'
+        this.emailService.send(this.email).subscribe(() => this.emailSendStatus = 'sent');
     }
 }
 

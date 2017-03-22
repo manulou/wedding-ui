@@ -3,10 +3,12 @@
  */
 export class SearchFilter {
     public keyword : string;
+    public location : number;
     public countryId : number;
     public maxPrice : number;
 
     constructor() {
         this.countryId = 0;
+        this.location = 0;
     }
 }

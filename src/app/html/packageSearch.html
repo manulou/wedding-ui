@@ -8,23 +8,32 @@
 
             <form #searchForm="ngForm" novalidate class="form-horizontal">
                 <div class="row">
-                    <div class="col-sm-12 col-md-4">
+                    <div class="col-sm-12 col-md-3">
                         <div class="form-group">
                             <input id="keyword" name="keyword" type="text" class="form-control"
                                  placeholder="Keyword" [(ngModel)]="searchFilter.keyword" #keyword="ngModel">
                         </div><!-- /.form-group -->
                     </div><!-- /.col-* -->
 
-                    <div class="col-sm-12 col-md-4">
+                    <div class="col-sm-12 col-md-3">
                         <div class="form-group">
-                            <select name="country" class="form-control" [(ngModel)]="searchFilter.countryId" #country="ngModel" title="Select Location">
+                            <select name="country" class="form-control" [(ngModel)]="searchFilter.countryId" #country="ngModel" title="Select Country" (change)="enableDefault('country')">
                                 <option value="0" disabled selected>Select Country</option>
                                 <option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}</option>
                             </select>
                         </div><!-- /.form-group -->
                     </div><!-- /.col-* -->
 
-                    <div class="col-sm-12 col-md-4">
+                    <div class="col-sm-12 col-md-3">
+                        <div class="form-group">
+                            <select name="location" class="form-control" [(ngModel)]="searchFilter.location" #location="ngModel" title="Select Location" (change)="enableDefault('location')">
+                                <option value="0" disabled selected>Select Location</option>
+                                <option *ngFor="let location of locations" value="{{location.id}}">{{location.name}}</option>
+                            </select>
+                        </div><!-- /.form-group -->
+                    </div><!-- /.col-* -->
+
+                    <div class="col-sm-12 col-md-3">
                         <div class="form-group">
                            <input type="number" name="maxPrice" class="form-control" placeholder="Max price"
                                 [(ngModel)]="searchFilter.maxPrice" #maxPrice="ngModel" />

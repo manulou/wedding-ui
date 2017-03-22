@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
+import {Response} from "@angular/http";
 import {AgenciesService} from "../services/agenciesService";
 import {AgenciesList} from "../model/agenciesList";
 import {Configuration} from "../app.constants";
@@ -13,7 +15,7 @@ export class SecureAgenciesComponent implements OnInit {
     public agencies: AgenciesList;
     public pageInfo : PageInfo;
 
-    constructor(private agenciesService: AgenciesService) {}
+    constructor(private router: Router, private agenciesService: AgenciesService) {}
 
     ngOnInit() {
         this.agencies = new AgenciesList();
@@ -30,13 +32,13 @@ export class SecureAgenciesComponent implements OnInit {
         this.agenciesService
             .getAllSecure(this.pageInfo)
             .subscribe((data:AgenciesList) => this.agencies = data,
-                error => console.log(error),
+                error => this.handleError(error),
                 () => console.log('Get all agencies complete'));
     }
 
     public deleteAgency(agency : Agency) : void {
         if (confirm('Are you sure you want to delete the agency ' + agency.name + '?')) {
-            this.agenciesService.delete(agency.id).subscribe(() => this.searchAgencies(this.pageInfo.page));
+            this.agenciesService.delete(agency.id).subscribe(() => this.searchAgencies(this.pageInfo.page), error => this.handleError(error));
         }
 };
 
@@ -45,5 +47,12 @@ export class SecureAgenciesComponent implements OnInit {
             this.pageInfo.page = pageNumber;
             this.getAllItems();
         }
+    }
+
+    private handleError(error: Response) {
+        if (error.status === 401) {
+            this.router.navigate(['/login']);
+        }
+        console.log(`Service returned ${error.status}`);
     }
 }

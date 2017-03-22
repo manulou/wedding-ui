@@ -1,0 +1,38 @@
+<div>
+    <div class="content">
+        <div class="container">
+            <div class="row detail-content">
+                <div class="main">
+                    <div class="col-md-12">
+                        <h1>
+                            Log in
+                        </h1>
+                    </div>
+
+                    <form #loginForm="ngForm" (ngSubmit)="login()" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"
+                                   [ngClass]="{'has-error' : username.dirty && username.invalid}">Username</label>
+                            <div class="col-md-10 col-xs-12" [ngClass]="{'has-error' : username.dirty && username.invalid}">
+                                <input type="text" name="username" class="form-control" [(ngModel)]="user.username" required
+                                       #username="ngModel"/>
+                            </div>
+                            <label class="col-md-2 control-label"
+                                   [ngClass]="{'has-error': password.dirty && password.invalid}">Password</label>
+                            <div class="col-md-10 col-xs-12" [ngClass]="{'has-error': password.dirty && password.invalid}">
+                                <input type="password" name="country" class="form-control" [(ngModel)]="user.password" required
+                                        #password="ngModel" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button id="submitButton" type="submit"
+                                    data-loading-text="Just a sec..."
+                                    class="btn btn-success btn-lg">Log in
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

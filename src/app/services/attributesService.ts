@@ -21,20 +21,26 @@ export class AttributesService {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
         this.headers.append('Accept', 'application/json');
+        this.headers.append('X-Requested-With', 'XMLHttpRequest');
     }
 
     public getAll = (): Observable<Attribute[]> => {
-        return this._http.get(this.actionUrl + 'getAttributes')
+        return this._http.get(`${this.actionUrl}getAttributes`)
+            .map((response:Response) => <Attribute[]>response.json()).catch(this.handleError);
+    }
+
+    public getByCategoryName = (name: string): Observable<Attribute[]> => {
+        return this._http.get(`${this.actionUrl}getAttributesByCategoryName?name=${name}`)
             .map((response:Response) => <Attribute[]>response.json()).catch(this.handleError);
     }
 
     public save = (attribute: Attribute): Observable<Attribute> => {
-        return this._http.post(this.configuration.SecureServerWithApiUrl + 'saveAttribute', attribute)
+        return this._http.post(`${this.configuration.SecureServerWithApiUrl}saveAttribute`, attribute)
             .map((response: Response) => <Attribute>response.json()).catch(this.handleError);
     }
 
     private handleError(error: Response) {
         console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
+        return Observable.throw(error);
     }
 }

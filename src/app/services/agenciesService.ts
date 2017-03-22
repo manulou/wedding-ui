@@ -2,7 +2,7 @@
  * Created by Vlad on 16/10/2016.
  */
 import {Injectable} from '@angular/core';
-import {Http, Response, Headers, URLSearchParams} from '@angular/http';
+import {Http, Response, Headers, URLSearchParams, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch';
 import {Observable} from 'rxjs/Rx';
@@ -20,6 +20,7 @@ export class AgenciesService {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
         this.headers.append('Accept', 'application/json');
+        this.headers.append('X-Requested-With', 'XMLHttpRequest');
     }
 
     public getAll = (pageInfo: PageInfo): Observable<AgenciesList> => {
@@ -35,7 +36,8 @@ export class AgenciesService {
         params.set('page', pageInfo.page.toString());
         params.set('sortField', pageInfo.sortField);
         params.set('sortDirection', pageInfo.sortDirection);
-        return this._http.get(actionUrl + 'searchAgencies', { search : params })
+        const options = new RequestOptions({ headers: this.headers, search: params });
+        return this._http.get(actionUrl + 'searchAgencies', options)
             .map((response: Response) => <AgenciesList>response.json()).catch(this.handleError);
     }
 
@@ -65,6 +67,6 @@ export class AgenciesService {
 
     private handleError(error: Response) {
         console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
+        return Observable.throw(error);
     }
 }

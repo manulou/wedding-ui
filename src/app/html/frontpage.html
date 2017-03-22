@@ -29,16 +29,13 @@
                             <div class="hero-image-location form-group">
                                 <select id="country" name="country" class="form-control selectpicker" title="Country"
                                         [(ngModel)]="searchFilter.countryId" #country="ngModel">
-                                    <option value="0"></option>
                                     <option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}</option>
                                 </select>
                             </div><!-- /.form-group -->
 
                             <div class="hero-image-category form-group">
                                 <select id="location" name="location" class="form-control selectpicker" title="Location">
-                                    <option value="">Ocean coast</option>
-                                    <option value="">Yacht</option>
-                                    <option value="">Mountain top</option>
+                                    <option *ngFor="let location of locations" value="{{location.id}}">{{location.name}}</option>
                                 </select>
                             </div><!-- /.form-group -->
 

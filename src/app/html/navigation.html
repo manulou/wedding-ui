@@ -14,20 +14,23 @@
                 <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <a routerLink="/">Home</a>
                 </li>
-                <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                <li *ngIf="authenticated" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <a routerLink="/secure">Secure</a>
                 </li>
                 <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <a routerLink="/search">Search</a>
                 </li>
 
-                <li >
-                    <a href="#">Contact <i class="fa fa-chevron-down"></i></a>
-                    <ul class="sub-menu">
-                        <li><a href="contact-1.html">Contact v1</a></li>
-                        <li><a href="contact-2.html">Contact v2</a></li>
-                        <li><a href="contact-3.html">Contact v3</a></li>
-                    </ul>
+                <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a routerLink="/contact">Contact</a>
+                    <!--<ul class="sub-menu">-->
+                        <!--<li><a href="contact-1.html">Contact v1</a></li>-->
+                        <!--<li><a href="contact-2.html">Contact v2</a></li>-->
+                        <!--<li><a href="contact-3.html">Contact v3</a></li>-->
+                    <!--</ul>-->
+                </li>
+                <li *ngIf="authenticated">
+                    <a href="javascript:;" (click)="logout()">Log out</a>
                 </li>
             </ul>
 

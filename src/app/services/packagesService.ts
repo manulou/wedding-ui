@@ -24,6 +24,7 @@ export class PackagesService {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
         this.headers.append('Accept', 'application/json');
+        this.headers.append('X-Requested-With', 'XMLHttpRequest');
     }
 
     public delete = (id: number): Observable<void> => {
@@ -35,11 +36,17 @@ export class PackagesService {
         params.set('page', pageInfo.page.toString());
         params.set('sortField', pageInfo.sortField);
         params.set('sortDirection', pageInfo.sortDirection);
+        if (searchFilter.keyword) {
+            params.set('keyword', searchFilter.keyword);
+        }
         if (searchFilter.countryId) {
             params.set('countryId', searchFilter.countryId.toString());
         }
         if (searchFilter.maxPrice) {
             params.set('maxPrice', searchFilter.maxPrice.toString());
+        }
+        if (searchFilter.location) {
+            params.set('location', searchFilter.location.toString());
         }
         return this._http.get(this.configuration.ServerWithApiUrl + 'searchPackages', { search : params })
             .map((response: Response) => <PackagesList>response.json()).catch(this.handleError);
@@ -52,6 +59,6 @@ export class PackagesService {
 
     private handleError(error: Response) {
         console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
+        return Observable.throw(error);
     }
 }

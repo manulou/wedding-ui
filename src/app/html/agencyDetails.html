@@ -94,6 +94,11 @@
             <h2>{{package.price}} EUR</h2> <!-- <a href="javascript:;" onclick="togglePackage(this)"> -->
           </div>
         </div>
+          <div class="background-white p20" style="margin-bottom: 20px;" *ngIf="package.description">
+              <div class="detail-description" style="margin-bottom: 0px; padding-bottom: 0px; border: 0px">
+                  <p style="white-space: pre-wrap">{{package.description}}</p>
+              </div>
+          </div>
         <div class="row" id="packageRow{{package.id}}"> <!-- [ngClass]="{'hidden': activePackage != package.id}" -->
           <div class="categories">
             <ng-container *ngFor="let category of categories">
@@ -125,25 +130,28 @@
       <h2>Enquire Form</h2>
 
       <div class="detail-enquire-form background-white p20">
-        <form method="post" action="?">
+          <div class="form-group" style="text-align:center" *ngIf="emailSendStatus === 'sent'">
+              <h3>Thanks! Your enquiry has been sent!</h3>
+          </div>
+        <form method="post" action="?" *ngIf="emailSendStatus !== 'sent'">
           <div class="form-group">
-            <label for="">Name</label>
-            <input type="text" class="form-control" name="" id="">
+              <label>Name <span class="required">*</span></label>
+              <input type="text" name="name" class="form-control" [(ngModel)]="email.name" required #name="ngModel"/>
           </div><!-- /.form-group -->
 
           <div class="form-group">
-            <label for="">Email <span class="required">*</span></label>
-            <input type="email" class="form-control" name="" id="" required>
+            <label>Email <span class="required">*</span></label>
+            <input type="text" name="mail" class="form-control" [(ngModel)]="email.email" required #mail="ngModel"/>
           </div><!-- /.form-group -->
 
           <div class="form-group">
-            <label for="">Message <span class="required">*</span></label>
-            <textarea class="form-control" name="" id="" rows="5" required></textarea>
+            <label>Message <span class="required">*</span></label>
+            <textarea name="message" class="form-control" [(ngModel)]="email.message" required #message="ngModel"></textarea>
           </div><!-- /.form-group -->
 
           <p>Required fields are marked <span class="required">*</span></p>
 
-          <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-paper-plane"></i>Send Message</button>
+          <button class="btn btn-primary btn-block" type="submit" (click)="sendEmail()" (disabled)="emailSendStatus === 'sending'"><i class="fa fa-paper-plane"></i>Send Message</button>
         </form>
       </div><!-- /.detail-enquire-form -->
     </div>

@@ -7,10 +7,13 @@ import {PackagesService} from "../services/packagesService";
 import {CountriesService} from "../services/countriesService";
 import {Country} from "../model/country";
 import {SearchState} from "../model/helper/searchState";
+import {AttributesService} from "../services/attributesService";
+import {Attribute} from "../model/attribute";
+declare var $:any;
 
 @Component({
     selector: 'packageSearch',
-    providers: [PackagesService, CountriesService, Configuration],
+    providers: [PackagesService, CountriesService, AttributesService, Configuration],
     templateUrl: '../html/packageSearch.html'
 })
 export class PackageSearchComponent implements OnInit {
@@ -21,9 +24,11 @@ export class PackageSearchComponent implements OnInit {
     public pageInfo : PageInfo;
     public searchFilter : SearchFilter;
     public countries : Country[];
+    public locations : Attribute[];
 
     constructor(private packagesService: PackagesService,
-                private countriesService: CountriesService) {}
+                private countriesService: CountriesService,
+                private attributesService: AttributesService) {}
 
     ngOnInit() {
         this.packages = new PackagesList();
@@ -31,14 +36,13 @@ export class PackageSearchComponent implements OnInit {
 
         if (!PackageSearchComponent.searchState) {
             PackageSearchComponent.searchState = new SearchState();
-
         }
 
         this.searchFilter = PackageSearchComponent.searchState.searchFilter;
         this.pageInfo = PackageSearchComponent.searchState.pageInfo;
 
-        this.countriesService.getAllForFilter()
-            .subscribe(countries => this.countries = countries);
+        this.countriesService.getAllForFilter().subscribe(countries => this.countries = countries);
+        this.attributesService.getByCategoryName('Location').subscribe(locations => this.locations = locations);
 
         this.search();
     }
@@ -67,5 +71,10 @@ export class PackageSearchComponent implements OnInit {
             this.pageInfo.page = pageNumber;
             this.search();
         }
+    }
+
+    private enableDefault(name: string): void {
+        const select = $(`[name="${name}"]`);
+        select.find('option').first().prop('disabled', select.val() === '0');
     }
 }
