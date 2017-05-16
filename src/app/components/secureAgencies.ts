@@ -24,7 +24,7 @@ export class SecureAgenciesComponent implements OnInit {
         this.pageInfo = new PageInfo();
         this.pageInfo.page = 0;
         this.pageInfo.sortField = 'id';
-        this.pageInfo.sortDirection = 'asc';
+        this.pageInfo.sortDirection = 'desc';
         this.getAllItems();
     }
 

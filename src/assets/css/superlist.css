@@ -10610,3 +10610,10 @@ ol li {
 .has-error {
     color:red;
 }
+.document-title-contact {
+    background-image: url("../img/banners/contact.jpg");
+}
+
+.document-title-search {
+    background-image: url("../img/banners/search.jpg");
+}

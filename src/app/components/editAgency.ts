@@ -55,7 +55,7 @@ export class EditAgencyComponent implements OnInit {
         this.agency = new Agency();
         this.agency.country = new Country();
 
-        var id = this.route.snapshot.params['id'];
+        const id = this.route.snapshot.params['id'];
 
         this.newAgency = (id === 'new');
 
@@ -67,17 +67,8 @@ export class EditAgencyComponent implements OnInit {
 
         if (!this.newAgency) {
             this.id = this.route.snapshot.params['id'];
-            this.imagesService.getThumbnails(id)
-                .subscribe(images => {
-                    this.images = images;
-                    this.sortImages();
-                });
-            this.agenciesService.getSecure(id)
-                .subscribe(agency => {
-                    this.agency = agency;
-                    this.changeDetector.detectChanges();
-                    this.initDragAndDrop();
-                });
+            this.loadThumbnails(id);
+            this.loadAgency(id);
         } else {
             this.images = [];
         }
@@ -93,6 +84,23 @@ export class EditAgencyComponent implements OnInit {
         return this.newAgency;
     }
 
+    public loadAgency(id : number): void {
+        this.agenciesService.getSecure(id)
+            .subscribe(agency => {
+                this.agency = agency;
+                this.changeDetector.detectChanges();
+                this.initDragAndDrop();
+            });
+    }
+
+    public loadThumbnails(id : number): void {
+        this.imagesService.getThumbnails(id)
+            .subscribe(images => {
+                this.images = images;
+                this.sortImages();
+            });
+    }
+
     public save(agency : Agency): void {
         if(this.agencyForm.valid) {
             this.agenciesService.save(this.agency)
@@ -101,6 +109,8 @@ export class EditAgencyComponent implements OnInit {
                     this.agency = agency;
                     if (this.isNewAgency()) {
                         this.router.navigate(['/secure/agency', agency.id]);
+                        this.loadAgency(agency.id);
+                        this.id = agency.id;
                     }
                 });
         } else {

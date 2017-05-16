@@ -52,10 +52,10 @@
                     <div class="detail-contact-email">
                         <i class="fa fa-envelope-o"></i> <a href="mailto:{{agency?.email}}">{{agency?.email}}</a>
                     </div>
-                    <div class="detail-contact-phone">
+                    <div class="detail-contact-phone" *ngIf="agency?.phone">
                         <i class="fa fa-mobile-phone"></i> <a href="tel:{{agency?.phone}}">{{agency?.phone}}</a>
                     </div>
-                    <div class="detail-contact-website">
+                    <div class="detail-contact-website" *ngIf="agency?.website">
                         <i class="fa fa-globe"></i> <a href="{{agency?.website}}" target="_blank">{{agency?.website}}</a>
                     </div>
                     <div class="detail-contact-address">
@@ -86,6 +86,7 @@
 
     <div class="col-sm-12">
       <ng-container *ngFor="let package of agency?.packages">
+        <ng-container *ngIf="activePackage ? (package.id == activePackage) : true">
         <div class="row">
           <div class="col-md-6 text-left">
             <h2>{{package.name}}</h2> <!-- <a href="javascript:;" onclick="togglePackage(this)"> -->
@@ -125,6 +126,7 @@
           </div>
         </div>
         <hr class="col-md-12" />
+      </ng-container>
       </ng-container>
 
       <h2>Enquire Form</h2>
